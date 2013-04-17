@@ -10,7 +10,7 @@ app = Flask(__name__)
 app.config.from_pyfile("config.cfg")
 
 db = Database(app)
-auth = Auth(app, db)
+
 
 class User(db.Model, BaseUser):
     username = CharField()
@@ -29,8 +29,21 @@ class Note(db.Model):
 class NoteAdmin(ModelAdmin):
     columns = ('title', 'content', 'created',)
 
+class UserAdmin(ModelAdmin):
+    columns = ('username', 'email', 'admin', )
+
+class CustomAuth(Auth):
+    def get_user_model(self):
+        return User
+
+    def get_model_admin(self, model_admin=None):
+        return UserAdmin
+
+auth = CustomAuth(app, db)
+
 admin = Admin(app, auth)
 admin.register(Note, NoteAdmin)
+admin.register(User, UserAdmin)
 auth.register_admin(admin)
 admin.setup()
 
