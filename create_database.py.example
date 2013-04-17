@@ -1,8 +1,8 @@
-from remarque import auth, Note
+from remarque import User, Note
 
-auth.User.create_table(fail_silently=True)
+User.create_table(fail_silently=True)
 Note.create_table(fail_silently=True)
 
-admin2 = auth.User(username='', email="", admin=True, active=True)
+admin2 = User(username='', email="", admin=True, active=True)
 admin2.set_password("")
 admin2.save()
