@@ -6,3 +6,4 @@ DATABASE = {
 }
 DEBUG = True
 SECRET_KEY = 'setkeyhere'
+PORT = 8123

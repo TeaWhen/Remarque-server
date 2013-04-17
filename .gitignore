@@ -1,4 +1,4 @@
 *.DS_Store
 config.cfg
-create_admin.py
+create_database.py
 *.pyc
