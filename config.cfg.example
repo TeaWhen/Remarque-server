@@ -1,0 +1,8 @@
+DATABASE = {
+    'name': '',
+    'engine': 'peewee.PostgresqlDatabase', // or SqliteDatabase, MySQLDatabase
+    'user': '',
+    'password': ''
+}
+DEBUG = True
+SECRET_KEY = 'setkeyhere'

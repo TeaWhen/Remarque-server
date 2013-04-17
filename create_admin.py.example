@@ -1,0 +1,4 @@
+from remarque import auth
+admin2 = auth.User(username='', email="", admin=True, active=True)
+admin2.set_password("")
+admin2.save()
