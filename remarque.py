@@ -11,7 +11,6 @@ app.config.from_pyfile("config.cfg")
 
 db = Database(app)
 
-
 class User(db.Model, BaseUser):
     username = CharField()
     password = CharField()
@@ -20,6 +19,9 @@ class User(db.Model, BaseUser):
     active = BooleanField(default=True)
     admin = BooleanField(default=False)
 
+    def __unicode__(self):
+        return self.username
+
 class Note(db.Model):
     user = ForeignKeyField(User)
     title = CharField()
@@ -27,7 +29,7 @@ class Note(db.Model):
     created = DateTimeField(default=times.now)
 
 class NoteAdmin(ModelAdmin):
-    columns = ('title', 'content', 'created',)
+    columns = ('user', 'title', 'content', 'created',)
 
 class UserAdmin(ModelAdmin):
     columns = ('username', 'email', 'admin', )
