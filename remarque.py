@@ -28,6 +28,9 @@ class Note(db.Model):
     content = TextField()
     created = DateTimeField(default=times.now)
 
+    def __unicode__(self):
+        return "{} from {}".format(self.title, self.user.username)
+
 class NoteAdmin(ModelAdmin):
     columns = ('user', 'title', 'content', 'created',)
 
@@ -62,6 +65,10 @@ api = RestAPI(app, default_auth=user_auth)
 api.register(User, UserResource, auth=admin_auth)
 api.register(Note, NoteResource)
 api.setup()
+
+@app.route("/version")
+def version():
+    return "2.1"
 
 if __name__ == '__main__':
     app.run(host="0.0.0.0", port=app.config["PORT"])
